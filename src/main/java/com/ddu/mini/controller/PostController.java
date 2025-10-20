@@ -3,6 +3,7 @@ package com.ddu.mini.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -72,12 +73,13 @@ public class PostController {
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<?> view (@PathVariable("id") Long id) {
-		Optional<Post> _post = postService.viewPost(id);
-		if (_post.isPresent()) {
-			return ResponseEntity.ok(_post.get());
-		} else {
-			return ResponseEntity.status(404).body("해당 게시글이 존재하지 않습니다");
-		}
+		 try {
+		        Post post = postService.viewPost(id); // 조회수 증가 포함
+		        return ResponseEntity.ok(post);
+		        
+		    } catch (NoSuchElementException e) {
+		        return ResponseEntity.status(404).body("해당 게시글이 존재하지 않습니다.");
+		    }
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update (@PathVariable("id") Long id, @Valid @RequestBody PostDto postDto, Authentication auth) {

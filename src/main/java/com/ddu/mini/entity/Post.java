@@ -33,6 +33,9 @@ public class Post {
 	@CreationTimestamp
 	private LocalDateTime date;
 	
+	@Column
+	private Long hit = 0L;
+	
 	@ManyToOne
 	private Member author;
 	

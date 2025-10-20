@@ -1,6 +1,8 @@
 package com.ddu.mini.service;
 import com.ddu.mini.repository.PostRepository;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +44,13 @@ public class PostService {
 	public List<Post> list () {
 		return postRepository.findAll();
 	}
-	public Optional<Post> viewPost (Long id) {
-		return postRepository.findById(id);
+	@Transactional
+	public Post viewPost (Long id) {
+		
+		Post post = postRepository.findById(id).orElseThrow();
+		post.setHit(post.getHit() + 1);
+		
+		return post;
 	}
 	public Post updatePost (PostDto postDto,Long id) {
 		Post oldpost = postRepository.findById(id).orElseThrow();
@@ -58,5 +65,8 @@ public class PostService {
 		Post post = postRepository.findById(id).orElseThrow();
 		
 		postRepository.delete(post);
+	}
+	public List<Post> myPost (Member member) {
+		return postRepository.findByAuthor(member);
 	}
 }

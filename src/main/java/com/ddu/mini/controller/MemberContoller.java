@@ -1,6 +1,7 @@
 package com.ddu.mini.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ddu.mini.dto.MemberDto;
 import com.ddu.mini.entity.Member;
+import com.ddu.mini.entity.Post;
+import com.ddu.mini.entity.Reservation;
 import com.ddu.mini.service.MemberService;
+import com.ddu.mini.service.PostService;
+import com.ddu.mini.service.ReservationService;
 
 import jakarta.validation.Valid;
 
@@ -30,10 +36,17 @@ public class MemberContoller {
 	MemberService memberService;
 	
 	@Autowired
+	PostService postService;
+	
+	@Autowired
+	ReservationService reservationService;
+	
+	@Autowired
 	PasswordEncoder encoder;
 
 	@Autowired
 	AuthenticationManager authManager;
+	
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> join(@Valid @RequestBody MemberDto memberDto , BindingResult bindingResult) {
@@ -60,4 +73,34 @@ public class MemberContoller {
 	public ResponseEntity<?> me (Authentication authentication) {
 		return ResponseEntity.ok(Map.of("email", authentication.getName()));
 	}
+	@GetMapping("/profile")
+	public ResponseEntity<?> myPage(Authentication authentication) {
+		if (authentication == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                             .body("로그인이 필요합니다.");
+	    }
+		Member member= memberService.findMember(authentication.getName()).orElseThrow();
+		List<Post> myPosts = postService.myPost(member);
+		List<Reservation> myReservations = reservationService.myList(member);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("member", member);
+		result.put("posts", myPosts);
+		result.put("myReservations", myReservations);
+		
+		return ResponseEntity.ok(result);
+	}
+	@PutMapping("/profile")
+	public ResponseEntity<?> updateMember(Authentication auth, @Valid@RequestBody MemberDto memberDto, BindingResult bindingResult) {
+		if (auth == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                             .body("로그인이 필요합니다.");
+	    }
+		
+		String email = auth.getName();
+        Member member = memberService.updateMember(email, memberDto, encoder);
+        return ResponseEntity.ok(member);
+	}
+
+	
 }

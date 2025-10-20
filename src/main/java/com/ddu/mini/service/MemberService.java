@@ -31,4 +31,11 @@ public class MemberService {
 		member.setPassword(encoder.encode( memberDto.getPassword()));
 		return memberRepository.save(member);
 	}
+	public Member updateMember (String email,MemberDto memberDto, PasswordEncoder encoder) {
+		Member member = memberRepository.findByEmail(email).orElseThrow();
+		member.setName(memberDto.getName());
+		member.setPassword(encoder.encode(memberDto.getPassword()));
+		
+		return memberRepository.save(member);
+	}
 }

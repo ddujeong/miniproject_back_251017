@@ -1,28 +1,28 @@
 package com.ddu.mini.entity;
 
-import jakarta.persistence.Column;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
 @Data
-public class Member {
+public class Reservation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column( nullable = false)
-	private String name;
+	private String service;
 	
-	@Column(nullable = false, unique = true)
-	private String email;
+	private LocalDateTime reservationdatetime;
 	
-	@Column(nullable = false)
-	private String password;
+	private String status;
 	
-	private String avatar;
+	@ManyToOne
+	private Member member;
 }
