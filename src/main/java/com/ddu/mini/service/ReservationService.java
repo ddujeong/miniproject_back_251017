@@ -55,4 +55,7 @@ public class ReservationService {
 		
 		return reservationRepository.save(oldReservation);
 	}
+	public List<Reservation> allList() {
+		return reservationRepository.findAll();
+	}
 }

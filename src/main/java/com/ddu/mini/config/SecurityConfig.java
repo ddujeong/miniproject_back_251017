@@ -36,8 +36,8 @@ public class SecurityConfig {
 		.cors(cors -> cors.configurationSource(corsConfigurationSource())) // cors => 활성화
 		.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/", "/index.html", "/static/**").permitAll()
-				.requestMatchers("/api/member/signup", "/api/member/login", "/api/post", "/api/post/**","/api/comment","/api/comment/**")
-				.permitAll().requestMatchers("/", "/signup","/login" ,"/post", "/post/**","/write" ).permitAll()
+				.requestMatchers("/api/member/signup", "/api/member/login", "/api/post", "/api/post/**","/api/comment","/api/comment/**", "/api/reservation", "/api/reservation/**")
+				.permitAll().requestMatchers("/", "/signup","/login" ,"/post", "/post/**","/write", "/reservation" ).permitAll()
 				.anyRequest().authenticated()
 				)
 				// 아이디 && 비밀번호를 security 에서 확인 후 session 까지 생성해줌 

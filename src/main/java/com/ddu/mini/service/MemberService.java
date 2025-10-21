@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
 
 import com.ddu.mini.dto.MemberDto;
@@ -13,9 +14,15 @@ import com.ddu.mini.repository.MemberRepository;
 
 @Service
 public class MemberService {
+
+    private final SecurityFilterChain filterChain;
 		
 	@Autowired
 	MemberRepository memberRepository;
+
+    MemberService(SecurityFilterChain filterChain) {
+        this.filterChain = filterChain;
+    }
 	
 	public Optional<Member> findMember (String email) {
 		return memberRepository.findByEmail(email);
@@ -33,8 +40,11 @@ public class MemberService {
 	}
 	public Member updateMember (String email,MemberDto memberDto, PasswordEncoder encoder) {
 		Member member = memberRepository.findByEmail(email).orElseThrow();
+		if (memberDto.getPassword() !=null && !memberDto.getPassword().isEmpty()) {
+			member.setPassword(encoder.encode(memberDto.getPassword()));
+		}
 		member.setName(memberDto.getName());
-		member.setPassword(encoder.encode(memberDto.getPassword()));
+		
 		
 		return memberRepository.save(member);
 	}

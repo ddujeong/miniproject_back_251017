@@ -96,6 +96,9 @@ public class MemberContoller {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 	                             .body("로그인이 필요합니다.");
 	    }
+		if (memberDto.getPassword() ==null || memberDto.getPassword().isEmpty()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호는 필수 입력 사항입니다.");
+		}
 		
 		String email = auth.getName();
         Member member = memberService.updateMember(email, memberDto, encoder);

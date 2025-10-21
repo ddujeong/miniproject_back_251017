@@ -109,7 +109,7 @@ public class CommentController {
 		if(_comment.isEmpty()) {
 			return ResponseEntity.status(404).body("존재하지 않는 댓글 입니다.");
 		}
-		if (auth == null || !auth.getName().equals(_comment.get().getAuthor().getEmail()) ) {
+		if (auth == null) {
 			return ResponseEntity.status(403).body("해당 댓글에 대한 권한이 없습니다.");
 		}
 		String email = auth.getName();
