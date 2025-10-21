@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostDto {
 	
+	@NotBlank(message = "카테고리를 선택 하세요.")
+	private String category;
+	
 	@NotBlank(message = "제목을 입력하세요.")
 	@Size(min = 5, message = "제목은 5글자 이상이어야 합니다.")
 	private String title;

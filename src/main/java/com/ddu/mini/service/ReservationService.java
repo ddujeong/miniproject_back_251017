@@ -31,6 +31,7 @@ public class ReservationService {
 		
 		Reservation reservation = new Reservation();
 		
+		reservation.setCategory(reservationDto.getCategory());
 		reservation.setService(reservationDto.getService());
 		reservation.setReservationdatetime(reservationDto.getReservationdatetime());
 		reservation.setMember(member);
@@ -50,6 +51,7 @@ public class ReservationService {
 	public Reservation updateReservation (ReservationDto reservationDto, Long id) {
 		Reservation oldReservation = reservationRepository.findById(id).orElseThrow();
 		
+		oldReservation.setCategory(reservationDto.getCategory());
 		oldReservation.setService(reservationDto.getService());
 		oldReservation.setReservationdatetime(reservationDto.getReservationdatetime());
 		

@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReservationDto {
 
+	@NotBlank(message = "카테고리를 선택하세요.")
+	private String category;
+	
 	@NotBlank(message = "서비스를 선택하세요.")
 	private String service;
 	

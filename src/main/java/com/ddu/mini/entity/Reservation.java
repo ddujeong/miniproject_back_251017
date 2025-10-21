@@ -17,6 +17,8 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String category;
+	
 	private String service;
 	
 	private LocalDateTime reservationdatetime;

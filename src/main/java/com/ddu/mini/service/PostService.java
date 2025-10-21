@@ -34,6 +34,7 @@ public class PostService {
 		
 		Post post = new Post();
 
+		post.setCategory(postDto.getCategory());
 		post.setTitle(postDto.getTitle());
 		post.setContent(postDto.getContent());
 		post.setAuthor(author);
@@ -55,6 +56,7 @@ public class PostService {
 	public Post updatePost (PostDto postDto,Long id) {
 		Post oldpost = postRepository.findById(id).orElseThrow();
 		
+		oldpost.setCategory(postDto.getCategory());
 		oldpost.setTitle(postDto.getTitle());
 		oldpost.setContent(postDto.getContent());
 		
