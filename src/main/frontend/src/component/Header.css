@@ -1,0 +1,43 @@
+.header {
+  background-color: #ffffff;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 22px;
+  color: #222222;
+  margin: 0;
+}
+
+.nav a,
+.nav-link {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #555555;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav a:hover,
+.nav-link:hover {
+  color: #8c7dff;
+  transform: translateY(-1px);
+}
+
+.logout {
+  color: #ff6b6b; /* 살짝 강조된 포인트 컬러 */
+}
+.logout:hover {
+  color: #e64b4b;
+}

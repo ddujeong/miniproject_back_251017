@@ -1,0 +1,122 @@
+/* 전체 카드 컨테이너 */
+.reservation-card {
+  background-color: #f9f9f9;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  transition: transform 0.2s ease;
+}
+
+.reservation-card:hover {
+  transform: translateY(-2px);
+}
+
+.reservation-card h2 {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* 폼 스타일 */
+.reservation-form label {
+  display: block;
+  margin-bottom: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.reservation-form select,
+.reservation-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservation-form select:focus,
+.reservation-form input:focus {
+  border-color: #8c7dff;
+  box-shadow: 0 0 6px rgba(140, 125, 255, 0.3);
+}
+
+/* 버튼 스타일 */
+.action-btn {
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.action-btn.reserve-btn {
+  background-color: #8c7dff;
+  color: #fff;
+}
+
+.action-btn.reserve-btn:hover {
+  background-color: #6d5de0;
+  transform: translateY(-2px);
+}
+
+.action-btn.edit {
+  background-color: #ffd166;
+  color: #222;
+}
+
+.action-btn.edit:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+.action-btn.delete {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.action-btn.delete:hover {
+  background-color: #e64b4b;
+  transform: translateY(-2px);
+}
+
+/* 예약 테이블 */
+.reservation-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  margin-top: 16px;
+}
+
+.reservation-table th {
+  text-align: center;
+  font-weight: 600;
+  color: #222;
+  padding: 12px 10px;
+}
+
+.reservation-table td {
+  text-align: center;
+  background-color: #fff;
+  padding: 12px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.reservation-table td.예약 {
+  color: #8c7dff; /* 보라: 예약 */
+}
+.reservation-table td.완료 {
+  color: #aaa; /* 회색: 완료 */
+}
+.reservation-table td.취소 {
+  color: #ff6b6b; /* 빨강: 취소 */
+}
+.reservation-table td.진행중 {
+  font-weight: bold;
+  color: #2c7900; /* 빨강: 취소 */
+}

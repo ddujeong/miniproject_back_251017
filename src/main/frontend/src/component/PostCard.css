@@ -1,0 +1,113 @@
+.post-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  margin: 20px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  font-family: "Inter", sans-serif;
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa; /* hover 시 살짝 밝은 배경 */
+}
+
+.post-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222222;
+}
+
+.post-card p {
+  font-size: 14px;
+  color: #555555;
+  margin: 4px 0;
+}
+
+.post-card .author {
+  font-weight: 600;
+  color: #8c7dff; /* 은은한 라벤더 컬러 포인트 */
+  display: flex;
+  align-items: center;
+}
+
+.post-card .author img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.post-card .date {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-left: 8px;
+}
+
+.post-card .badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #ffd6ba; /* 파스텔 오렌지 */
+  color: #222222;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.post-card.badge.헤어 {
+  background-color: #f0e68c;
+} /* 연한 카키 */
+.post-card.badge.피부 {
+  background-color: #ffe4e1;
+} /* 연한 핑크 */
+.post-card.badge.패키지 {
+  background-color: #add8e6;
+} /* 연한 블루 */
+.post-card.badge.이벤트 {
+  background-color: #f5deb3;
+} /* 연한 베이지 */
+.hot-badge {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 8px;
+  background: linear-gradient(45deg, #ff6a00, #ffcc00);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 12px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.new-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #56ccf2, #2f80ed); /* 파랑 그라데이션 */
+  color: #fff;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* transform: translateY(-1px); */
+  animation: pulse 1.5s infinite;
+}

@@ -1,0 +1,100 @@
+/* Home.css 기존 스타일 기반 */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.home-container h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #222;
+}
+
+.home-container p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.home-btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #8c7dff;
+  color: #fff;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-btn:hover {
+  background-color: #6d5de0;
+  transform: translateY(-2px);
+}
+
+/* 인기 게시글 섹션 */
+.popular-section {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.popular-section h2 {
+  font-size: 24px;
+  color: rgb(202, 94, 94);
+  margin-bottom: 20px;
+}
+
+.popular-card-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.no-popular {
+  text-align: center;
+  color: #777;
+}
+
+.no-popular-img {
+  margin-top: 16px;
+  border-radius: 12px;
+}
+.popular-card-wrapper .post-card {
+  position: relative; /* 뱃지를 카드 안에서 위치시키기 위함 */
+  width: 320px;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.popular-card-wrapper .post-card .post-badge {
+  position: absolute; /* 카드 안에서 띄우기 */
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background-color: #8c7dff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.popular-card-wrapper .post-card h2 {
+  margin-top: 40px; /* 뱃지와 겹치지 않도록 제목 띄우기 */
+  font-size: 18px;
+  color: #222;
+}

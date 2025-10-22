@@ -1,0 +1,44 @@
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 16px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.comment img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #8c7dff; /* 라벤더 컬러 포인트 */
+  margin-right: 8px;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #555555;
+  margin-top: 4px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 4px;
+}

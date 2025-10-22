@@ -1,0 +1,90 @@
+.post-list-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f4f4f4; /* 전체 라이트 그레이 배경 */
+  font-family: "Inter", sans-serif;
+}
+
+.post-list-container h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #222222;
+}
+
+.post-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.category-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.category-tabs button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  color: #222222;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-tabs button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.category-tabs button.active {
+  background-color: #8c7dff; /* 라벤더 포인트 */
+  color: #fff;
+  border-color: #8c7dff;
+  box-shadow: 0 2px 6px rgba(140, 125, 255, 0.3);
+  transform: translateY(0);
+}
+/* 페이지네이션 전체 컨테이너 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+/* 페이지 버튼 공통 스타일 */
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8; /* 기본 버튼 배경 */
+  color: #222;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 활성화된 페이지 */
+.pagination button.active {
+  background-color: #8c7dff; /* 라벤더 포인트 */
+  color: #fff;
+  border-color: #8c7dff;
+  box-shadow: 0 2px 6px rgba(140, 125, 255, 0.3);
+}
+
+/* hover 효과 */
+.pagination button:hover:not(.active) {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+/* 비활성화된 버튼 */
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
