@@ -3,6 +3,7 @@ package com.ddu.mini.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -103,6 +106,18 @@ public class MemberContoller {
 		String email = auth.getName();
         Member member = memberService.updateMember(email, memberDto, encoder);
         return ResponseEntity.ok(member);
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteMember(@PathVariable("id") Long id, Authentication auth){
+		Optional<Member> _member = memberService.findById(id);
+		if (_member.isEmpty()) {
+			return ResponseEntity.status(404).body("존재하지 않는 사용자입니다.");
+		}
+		if (auth == null || !auth.getName().equals(_member.get().getEmail()) ) {
+			return ResponseEntity.status(403).body("해당 권한이 없습니다.");
+		}
+		memberService.deleteMember(id);
+		return ResponseEntity.ok("회원 탈퇴 성공");
 	}
 
 	

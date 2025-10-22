@@ -3,10 +3,16 @@ import com.ddu.mini.repository.PostRepository;
 
 import jakarta.transaction.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ddu.mini.dto.PostDto;
@@ -45,6 +51,23 @@ public class PostService {
 	public List<Post> list () {
 		return postRepository.findAll();
 	}
+	public Map<String, Object> postPage (int page , int size, String category) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+		Page<Post> postPage;
+		
+		if (category == null || category.equals("전체")) {
+			postPage =postRepository.findAll(pageable);
+		} else {
+			postPage = postRepository.findByCategory(category, pageable);
+		}
+		 Map<String, Object> response = new HashMap<>();
+	        response.put("posts", postPage.getContent());
+	        response.put("currentPage", postPage.getNumber());
+	        response.put("totalPages", postPage.getTotalPages());
+	        response.put("totalItems", postPage.getTotalElements());
+		
+	        return response;
+	} 
 	@Transactional
 	public Post viewPost (Long id) {
 		
@@ -70,5 +93,8 @@ public class PostService {
 	}
 	public List<Post> myPost (Member member) {
 		return postRepository.findByAuthor(member);
+	}
+	public Post popPost (Long hit) {
+		return postRepository.findByHitIsGreaterThanEqual(hit);
 	}
 }

@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ddu.mini.dto.PostDto;
@@ -42,10 +47,25 @@ public class PostController {
         this.filterChain = filterChain;
         this.authManager = authManager;
     }
+//    @GetMapping
+//    public List<Post> postList () {
+//    	return postService.list();
+//    }
     @GetMapping
-    public List<Post> postList () {
-    	return postService.list();
+    public ResponseEntity<?> pagingList (@RequestParam(name = "page", defaultValue = "0")int page, 
+    		@RequestParam(name = "size", defaultValue = "10") int size, @RequestParam(name = "category", defaultValue = "전체") String category) {
+    	if (page < 0) {
+			page = 0;
+		}
+    	if (size <= 0) {
+			size = 5;
+		}
+    	
+		Map<String, Object> pagingResponse = postService.postPage(page, size, category);
+  
+    	return ResponseEntity.ok(pagingResponse);
     }
+	
 	
 	@PostMapping
 	public ResponseEntity<?> write (@Valid @RequestBody PostDto postDto, BindingResult bindingResult, Authentication auth) {
@@ -82,13 +102,22 @@ public class PostController {
 		    }
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update (@PathVariable("id") Long id, @Valid @RequestBody PostDto postDto, Authentication auth) {
+	public ResponseEntity<?> update (@PathVariable("id") Long id, @Valid @RequestBody PostDto postDto, Authentication auth, BindingResult bindingResult) {
 		Optional<Post> _post = postService.findbyId(id);
 		if (_post.isEmpty()) {
 			return ResponseEntity.status(404).body("해당 게시글이 존재하지 않습니다.");
 		} 
 		if (auth == null || !auth.getName().equals(_post.get().getAuthor().getEmail()) ) {
 			return ResponseEntity.status(403).body("해당 게시글에 대한 권한이 없습니다.");
+		}
+		if (bindingResult.hasErrors()) {
+			Map<String, String> errors = new HashMap<>();
+			bindingResult.getFieldErrors().forEach(
+					err -> {
+						errors.put(err.getField(), err.getDefaultMessage());
+					}
+					);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 		}
 		
 		Post updatePost = postService.updatePost(postDto, id);
@@ -106,6 +135,17 @@ public class PostController {
 		}
 		postService.deletePost(id);
 		return ResponseEntity.ok("글 삭제 성공");
+	}
+	@GetMapping("/popular")
+	public ResponseEntity<?> popular() {
+		
+        Post popPost = postService.popPost(100L);
+        
+        if (popPost == null) {
+			return ResponseEntity.ok("이 주의 인기게시글이 없습니다.");
+		}
+        return ResponseEntity.ok(popPost);
+    
 	}
 	
 }

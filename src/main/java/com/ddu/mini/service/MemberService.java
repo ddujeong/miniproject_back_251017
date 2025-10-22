@@ -23,6 +23,9 @@ public class MemberService {
     MemberService(SecurityFilterChain filterChain) {
         this.filterChain = filterChain;
     }
+    public Optional<Member> findById(Long id) {
+    	return memberRepository.findById(id);
+    }
 	
 	public Optional<Member> findMember (String email) {
 		return memberRepository.findByEmail(email);
@@ -47,5 +50,10 @@ public class MemberService {
 		
 		
 		return memberRepository.save(member);
+	}
+	public void deleteMember(Long id) {
+		Member member = memberRepository.findById(id).orElseThrow();
+		
+		memberRepository.delete(member);
 	}
 }
