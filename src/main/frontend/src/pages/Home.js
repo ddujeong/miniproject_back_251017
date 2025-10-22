@@ -50,7 +50,7 @@ const Home = () => {
         <h2>🔥 인기 게시글 🔥</h2>
         {loading ? (
           <p>인기 게시글 로딩 중...</p>
-        ) : post ? (
+        ) : post && post.author ? (
           <div className="popular-card-wrapper">
             <PostCard key={post.id} post={post} />
           </div>

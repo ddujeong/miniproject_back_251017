@@ -25,8 +25,8 @@ function App() {
     setMember(null);
     try {
       const res = await api.get("/api/member/me");
-      if (res.data?.id) {
-        setMember(res.data);
+      if (res.data) {
+        setMember(res.data.email);
       } else {
         setMember(null);
       }

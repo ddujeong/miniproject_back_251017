@@ -21,7 +21,7 @@ const PostCard = ({ post }) => {
       <h2>
         {post.hit > 50 && <span className="hot-badge">💥인기💥</span>}
         {newPost && <span className="new-badge">✨NEW✨</span>}
-        {post.title}[{post.comments.length}]
+        {`${post.title}[${post.comments?.length || 0}]`}
       </h2>
       <p className="author">
         <img
